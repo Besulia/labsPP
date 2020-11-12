@@ -1,8 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-    static int elem=2;
-    public static void masivA(Student[] arr) {
+    public static void getStudentsByFaculty(Student[] arr, int elem) {
         Scanner scan=new Scanner(System.in);
         System.out.println("Введіть назву факультету: ");
         String faculty=scan.nextLine();
@@ -12,21 +11,21 @@ public class Main {
         }
     }
 
-    public static void masivB(Student[] arr) {
+    public static void getStudentsByYear(Student[] arr, int elem) {
         Scanner scan=new Scanner(System.in);
         System.out.println("Введіть рік народження: ");
         String birthday=scan.nextLine();
-        String currBday="";
+        StringBuilder currBday= new StringBuilder();
         for(int i=0;i<elem;++i){
             for(int j=6;j<10;j++ ){
-               currBday+= arr[i].getBirthday().toCharArray()[j];
+               currBday.append(arr[i].getBirthday().toCharArray()[j]);
             }
-            if(Integer.parseInt(currBday)>Integer.parseInt(birthday))
+            if(Integer.parseInt(currBday.toString())>Integer.parseInt(birthday))
                 System.out.println(arr[i].toString());
-            currBday="";
+            currBday = new StringBuilder();
         }
     }
-    public static void masivC(Student[] arr) {
+    public static void getStudentsByGroup(Student[] arr, int elem) {
         Scanner scan=new Scanner(System.in);
         System.out.println("Введіть назву групи: ");
         String group=scan.nextLine();
@@ -36,12 +35,16 @@ public class Main {
         }
     }
     public static void main(String[] args) {
+        int elem;
+        System.out.println("Введіть к-сть студентів: ");
         Scanner scan=new Scanner(System.in);
+        elem=scan.nextInt();
         Student[] arr = new Student[elem];
+        
          for(int i=0;i<elem;i++){
              int id=0, course=0;
              String surname, name, fathersname, birthday, address, number, faculty, group;
-
+             
             System.out.println("Введіть Id: ");
             id= scan.nextInt();
             scan.nextLine();
@@ -66,8 +69,8 @@ public class Main {
             arr[i]=new Student(id,surname,name, fathersname, birthday,address,number,faculty,course,group);
             System.out.println(arr[i].toString());
         }
-        masivA(arr);
-        masivB(arr);
-        masivC(arr);
+        getStudentsByFaculty(arr,elem);
+        getStudentsByYear(arr, elem);
+        getStudentsByGroup(arr,elem);
     }
 }
